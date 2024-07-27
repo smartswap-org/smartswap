@@ -1,3 +1,6 @@
 [submodule "web"]
 	path = web
 	url = https://github.com/smartswap-org/web
+[submodule "discord-int"]
+	path = discord-int
+	url = https://github.com/smartswap-org/discord-int
