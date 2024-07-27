@@ -16,9 +16,4 @@
 [submodule "QTSBE"]
 	path = QTSBE
 	url = https://github.com/simonpotel/QTSBE
-[submodule "CEXcryptoLib"]
-	path = CEXcryptoLib
-	url = https://github.com/simonpotel/CEXcryptoLib
-[submodule "DEXcryptoLib"]
-	path = DEXcryptoLib
-	url = https://github.com/simonpotel/DEXcryptoLib
+
