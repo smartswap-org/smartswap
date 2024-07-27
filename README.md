@@ -9,7 +9,7 @@ For more details about the project, visit [**smartswap-org**](https://github.com
 
 ---
 
-### Install the project:
+# Install the project:
 
 To get the latest working version of the project, clone the `master` branch. If you want a specific version, browse all branches and select the one you need.
 
@@ -82,3 +82,10 @@ cd web/smartswap/
 npm install
 npm run dev
 ```
+
+---
+
+# Run the project:
+> [!IMPORTANT]  
+> *In coming...*
+
