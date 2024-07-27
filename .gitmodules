@@ -4,3 +4,21 @@
 [submodule "discord-int"]
 	path = discord-int
 	url = https://github.com/smartswap-org/discord-int
+[submodule "simulator"]
+	path = simulator
+	url = https://github.com/smartswap-org/simulator
+[submodule "trading-bot"]
+	path = trading-bot
+	url = https://github.com/smartswap-org/trading-bot
+[submodule "databases"]
+	path = databases
+	url = https://github.com/smartswap-org/databases
+[submodule "QTSBE"]
+	path = QTSBE
+	url = https://github.com/simonpotel/QTSBE
+[submodule "CEXcryptoLib"]
+	path = CEXcryptoLib
+	url = https://github.com/simonpotel/CEXcryptoLib
+[submodule "DEXcryptoLib"]
+	path = DEXcryptoLib
+	url = https://github.com/simonpotel/DEXcryptoLib
