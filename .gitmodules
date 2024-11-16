@@ -7,9 +7,6 @@
 [submodule "simulator"]
 	path = simulator
 	url = https://github.com/smartswap-org/simulator
-[submodule "trading-bot"]
-	path = trading-bot
-	url = https://github.com/smartswap-org/trading-bot
 [submodule "databases"]
 	path = databases
 	url = https://github.com/smartswap-org/databases
