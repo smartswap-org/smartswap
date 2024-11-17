@@ -1,12 +1,3 @@
-[submodule "web"]
-	path = web
-	url = https://github.com/smartswap-org/web
-[submodule "discord-int"]
-	path = discord-int
-	url = https://github.com/smartswap-org/discord-int
-[submodule "simulator"]
-	path = simulator
-	url = https://github.com/smartswap-org/simulator
 [submodule "databases"]
 	path = databases
 	url = https://github.com/smartswap-org/databases
