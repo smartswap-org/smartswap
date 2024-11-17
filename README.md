@@ -42,10 +42,10 @@ conda activate smartswap
 4.	Install dependencies
 ```
 sudo apt install libmariadb-dev
-pip install -r databases/requirements.txt --break-system-package
-pip install -r QTSBE/requirements.txt --break-system-package
-pip install -r discord-int/requirements.txt --break-system-package
-pip install -r simulator/requirements.txt --break-system-package
+pip install -r databases/requirements.txt
+pip install -r QTSBE/requirements.txt
+pip install -r discord-int/requirements.txt
+pip install -r simulator/requirements.txt
 ```
 
 5.	Configure startup script
