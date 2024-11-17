@@ -2,6 +2,11 @@
 
 <img src="https://avatars.githubusercontent.com/u/171923264" width="125" height="125">
 
+Please notice that the next installation needs to be updated with:
+- your custom paths
+- your custom user name and permissions
+- your custom python environment to install librairies (its better to create a dedicated one to smartswap)
+
 ## Installation
 
 1. **Clone the repository**  
@@ -12,6 +17,8 @@
    cd smartswap
    git checkout master
    ```
+
+Please dont forget to check your python env with `python which
 
 2.	Install Miniconda
 Download and install Miniconda for managing Python environments:
@@ -42,15 +49,13 @@ conda activate smartswap
 4.	Install dependencies
 ```
 sudo apt install libmariadb-dev
-pip install -r databases/requirements.txt
-pip install -r QTSBE/requirements.txt
-pip install -r discord-int/requirements.txt
-pip install -r simulator/requirements.txt
-pip install -r qtb/requirements.txt
+pip install -r "databases/requirements.txt"
+pip install -r "QTSBE/requirements.txt"
+pip install -r "qtb/requirements.txt"
 ```
 
 5.	Configure startup script
-Set up the system to run SmartSwap automatically on startup:
+Set up the system to run Smartswap automatically on startup:
 
 ```
 sudo nano /etc/rc.local
@@ -149,16 +154,22 @@ Create a config.json file under QTSBE/tools/auto_fetch/ to specify asset configu
 ```
 Additional Steps
 
-1.	Activate the smartswap environment and reload the shell configuration:
+- Activate the smartswap environment and reload the shell configuration:
 ```
 conda activate smartswap
 source ~/.bashrc
 ```
 
-2.	Update Python (if you need on your machine):
+- Update Python (if you need on your machine):
 ```
 conda install python=3.13.0
 ```
+
+- If you have an issue with importation of libs when its run on TMUX and not on your local session, you need to set conda for sudo 
+to run properly with the good environment, for instance in the start.sh:
+`sudo -u simon tmux new-session -d -s smartswap-qtb 'cd /home/simon/smartswap/qtb && which python && sh sh/qtb.sh'`
+
+
 
 
 Usage
