@@ -64,7 +64,7 @@ sudo nano /etc/rc.local
 Add the following line to the file:
 
 ```
-sudo tmux new-session -d -s smartswap 'bash /home/simon/smartswap/smartswap/start.sh'
+sudo tmux new-session -d -s smartswap 'bash /home/simon/smartswap/start.sh'
 ```
 
 
