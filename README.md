@@ -46,6 +46,7 @@ pip install -r databases/requirements.txt
 pip install -r QTSBE/requirements.txt
 pip install -r discord-int/requirements.txt
 pip install -r simulator/requirements.txt
+pip install -r qtb/requirements.txt
 ```
 
 5.	Configure startup script
