@@ -4,3 +4,6 @@
 [submodule "qtb"]
 	path = qtb
 	url = https://github.com/smartswap-org/qtb
+[submodule "webapp"]
+	path = webapp
+	url = https://github.com/smartswap-org/webapp
