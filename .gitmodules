@@ -7,3 +7,6 @@
 [submodule "webapp"]
 	path = webapp
 	url = https://github.com/smartswap-org/webapp
+[submodule "aegis"]
+	path = aegis
+	url = https://github.com/smartswap-org/aegis
