@@ -6,3 +6,5 @@ sudo -u simon tmux new-session -d -s smartswap-qtsbe-autofetch 'cd /home/simon/s
 sudo -u simon tmux new-session -d -s smartswap-qtsbe-discord-chat-bot 'cd /home/simon/smartswap/QTSBE && sh sh/discord_chat_bot.sh'
 
 sudo -u simon tmux new-session -d -s smartswap-webapp 'cd /home/simon/smartswap/webapp && npm run start'
+
+sudo -u simon tmux new-session -d -s smartswap-aegis 'cd /home/simon/smartswap/aegis && python run.py'
