@@ -98,8 +98,8 @@ Define the OHLCV data for each exchange in configs/exchanges.json:
         },
         "ohlcv_folder_path": "/home/simon/smartswap/smartswap/QTSBE/data/bank",
         "ohlcv": [
-            "BTC/USDT",
-            "ETH/USDT"
+            "BTC/USDC",
+            "ETH/USDC"
         ]
     }
 }
@@ -113,7 +113,7 @@ Configure each bot’s settings in configs/bots.json:
         "exchange": {
             "name": "Binance",
             "pairs": [
-                "BTC/USDT"
+                "BTC/USDC"
             ]
         },
         "strategy": "rsi_example",
@@ -145,9 +145,9 @@ Create a config.json file under QTSBE/tools/auto_fetch/ to specify asset configu
     },
     "Binance": {
         "assets": [
-            ["BTC/USDT", "1d"],
-            ["ETH/USDT", "1d"],
-            ["SOL/USDT", "1d"]
+            ["BTC/USDC", "1d"],
+            ["ETH/USDC", "1d"],
+            ["SOL/USDC", "1d"]
         ]
     }
 }
