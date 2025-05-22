@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  aegis-api:
+    build:
+      context: ./aegis
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    network_mode: "host"
+    env_file:
+      - ./aegis/.env
+    volumes:
+      - ./aegis:/app
+    restart: unless-stopped
+  
+  qtb:
+    build:
+      context: ./qtb
+      dockerfile: Dockerfile
+    env_file:
+      - ./qtb/.env
+    volumes:
+      - ./qtb/configs:/app/configs
+      - ./qtb/logs:/app/logs
+    restart: unless-stopped
+
+  qtsbe-api:
+    build:
+      context: ./QTSBE
+      dockerfile: Dockerfile
+    volumes:
+      - ./QTSBE:/app
+    command: python api/api.py
+    ports:
+      - "5002:5002"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  qtsbe-auto-fetch:
+    build:
+      context: ./QTSBE
+      dockerfile: Dockerfile
+    volumes:
+      - ./QTSBE:/app
+    command: python /app/tools/auto_fetch/auto-fetch.py
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  webapp:
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./webapp:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    command: >
+      sh -c "npm install && npm start"
+
+networks:
+  default:
+    driver: bridge 
