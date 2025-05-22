@@ -7,7 +7,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5001:5001"
-    network_mode: "host"
     env_file:
       - ./aegis/.env
     volumes:
