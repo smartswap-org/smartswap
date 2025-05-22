@@ -10,3 +10,6 @@
 [submodule "aegis"]
 	path = aegis
 	url = https://github.com/smartswap-org/aegis
+[submodule "www"]
+	path = www
+	url = https://github.com/smartswap-org/www
