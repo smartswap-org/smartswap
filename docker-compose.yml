@@ -62,6 +62,16 @@ services:
     command: >
       sh -c "npm install && npm start"
 
+  www:
+    build:
+      context: ./www
+      dockerfile: Dockerfile
+    ports:
+      - "4173:4173"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+
 networks:
   default:
     driver: bridge 
