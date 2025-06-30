@@ -61,6 +61,10 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
+    networks:
+      - smartswap-net
+    ports:
+      - "127.0.0.1:5004:5004"
 
   webapp:
     build:
