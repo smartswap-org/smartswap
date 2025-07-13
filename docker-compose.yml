@@ -25,6 +25,7 @@ services:
     volumes:
       - ./qtb/configs:/app/configs
       - ./qtb/logs:/app/logs
+      - ./QTSBE/data:/app/QTSBE/data
     restart: unless-stopped
     networks:
       smartswap-net:
