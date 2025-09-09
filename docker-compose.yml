@@ -94,6 +94,27 @@ services:
     restart: unless-stopped
     networks:
       - smartswap-net
+  logs-database:
+    image: clickhouse/clickhouse-server:latest
+    container_name: logs-database
+    restart: always
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    environment:
+      CLICKHOUSE_USER: test
+      CLICKHOUSE_PASSWORD: test
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    networks:
+      - smartswap-net
+
+volumes:
+  clickhouse_data: {}
 
 networks:
   smartswap-net:
