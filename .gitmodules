@@ -13,3 +13,6 @@
 [submodule "www"]
 	path = www
 	url = https://github.com/smartswap-org/www
+[submodule "nexus"]
+	path = nexus
+	url = https://github.com/smartswap-org/nexus
