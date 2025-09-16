@@ -3,11 +3,12 @@ USE default;
 CREATE TABLE IF NOT EXISTS logs
 (
     id UUID DEFAULT generateUUIDv4(),
-    startTime timestamp,
-    endTime timestamp,
+    date timestamp,
     level String,
     service String,
     message String,
     data String
 ) ENGINE = MergeTree()
-ORDER BY (startTime, level);
+PARTITION BY (service, toYYYYMMDD(date))
+ORDER BY (date, level)
+TTL date + INTERVAL 30 DAY DELETE;
