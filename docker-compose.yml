@@ -6,7 +6,7 @@ services:
     ports:
       - "127.0.0.1:5001:5001"
     env_file:
-      - ./aegis/.env
+      - ./.env
     volumes:
       - ./aegis:/app
     restart: unless-stopped
@@ -22,6 +22,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "127.0.0.1:8080:8080"
+    env_file:
+      - ./.env
     environment:
       - LOGS_DB_URL=jdbc:clickhouse://logs-database:8123/default
       - LOGS_DB_USERNAME=${CLICKHOUSE_USER}
@@ -40,7 +42,7 @@ services:
       context: ./qtb
       dockerfile: Dockerfile
     env_file:
-      - ./qtb/.env
+      - ./.env
     volumes:
       - ./qtb/configs:/app/configs
       - ./qtb/logs:/app/logs
@@ -63,6 +65,8 @@ services:
     command: python api/api.py
     ports:
       - "127.0.0.1:5002:5002"
+    env_file:
+      - ./.env
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
@@ -78,6 +82,8 @@ services:
     volumes:
       - ./QTSBE:/app
     command: python /app/tools/auto_fetch/auto-fetch.py
+    env_file:
+      - ./.env
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
@@ -95,6 +101,8 @@ services:
     volumes:
       - ./webapp:/app
       - /app/node_modules
+    env_file:
+      - ./.env
     environment:
       NODE_ENV: development
     command: >
@@ -108,6 +116,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4173:4173"
+    env_file:
+      - ./.env
     environment:
       NODE_ENV: production
     restart: unless-stopped
@@ -124,9 +134,8 @@ services:
     volumes:
       - clickhouse_data:/var/lib/clickhouse
       - ./clickhouse_init:/docker-entrypoint-initdb.d
-    environment:
-      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
-      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+    env_file:
+      - ./.env
     ulimits:
       nofile:
         soft: 262144
