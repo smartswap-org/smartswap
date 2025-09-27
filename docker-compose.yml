@@ -16,6 +16,25 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  nexus-api:
+    build:
+      context: ./nexus
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      - LOGS_DB_URL=jdbc:clickhouse://logs-database:8123/default
+      - LOGS_DB_USERNAME=${CLICKHOUSE_USER}
+      - LOGS_DB_PASSWORD=${CLICKHOUSE_PASSWORD}
+    restart: unless-stopped
+    networks:
+      smartswap-net:
+        ipv4_address: 172.28.0.12
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - logs-database
+
   qtb:
     build:
       context: ./qtb
