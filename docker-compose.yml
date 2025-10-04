@@ -13,8 +13,10 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      - logs-database
-      - core-database
+      logs-database:
+        condition: service_healthy
+      core-database:
+        condition: service_healthy
 
   qtb:
     build:
@@ -34,7 +36,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      - core-database
+      core-database:
+        condition: service_healthy
 
   qtsbe-api:
     build:
@@ -94,6 +97,11 @@ services:
         hard: 262144
     networks:
       - smartswap-net
+    healthcheck:
+      test: ["CMD", "clickhouse-client", "--query", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   core-database:
     image: mysql:8.0
@@ -113,6 +121,11 @@ services:
       - ./databases/mysql:/docker-entrypoint-initdb.d
     networks:
       - smartswap-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${CORE_DB_USERNAME}", "-p${CORE_DB_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   clickhouse_data: {}
