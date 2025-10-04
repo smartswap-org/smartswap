@@ -4,16 +4,9 @@ services:
       context: ./nexus
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:${NEXUS_PORT:-8080}:${NEXUS_PORT:-8080}"
     env_file:
       - ./.env
-    environment:
-      - LOGS_DB_URL=jdbc:clickhouse://logs-database:8123/default
-      - LOGS_DB_USERNAME=${LOGS_DB_USERNAME}
-      - LOGS_DB_PASSWORD=${LOGS_DB_PASSWORD}
-      - CORE_DB_URL=jdbc:mysql://mysql-database:3306/smartswap
-      - CORE_DB_USERNAME=${CORE_DB_USERNAME}
-      - CORE_DB_PASSWORD=${CORE_DB_PASSWORD}
     restart: unless-stopped
     networks:
       - smartswap-net
