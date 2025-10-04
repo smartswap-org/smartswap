@@ -1,21 +1,4 @@
 services:
-  aegis-api:
-    build:
-      context: ./aegis
-      dockerfile: Dockerfile
-    ports:
-      - "127.0.0.1:5001:5001"
-    env_file:
-      - ./.env
-    volumes:
-      - ./aegis:/app
-    restart: unless-stopped
-    networks:
-      smartswap-net:
-        ipv4_address: 172.28.0.11
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
   nexus-api:
     build:
       context: ./nexus
@@ -30,8 +13,7 @@ services:
       - LOGS_DB_PASSWORD=${CLICKHOUSE_PASSWORD}
     restart: unless-stopped
     networks:
-      smartswap-net:
-        ipv4_address: 172.28.0.12
+      - smartswap-net
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -49,8 +31,7 @@ services:
       - ./QTSBE/data:/app/QTSBE/data
     restart: unless-stopped
     networks:
-      smartswap-net:
-        ipv4_address: 172.28.0.10
+      - smartswap-net
     ports:
       - "127.0.0.1:5003:5003"
     extra_hosts:
@@ -92,38 +73,6 @@ services:
     ports:
       - "127.0.0.1:5004:5004"
 
-  webapp:
-    build:
-      context: ./webapp
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./webapp:/app
-      - /app/node_modules
-    env_file:
-      - ./.env
-    environment:
-      NODE_ENV: development
-    command: >
-      sh -c "npm install && npm start"
-    networks:
-      - smartswap-net
-
-  www:
-    build:
-      context: ./www
-      dockerfile: Dockerfile
-    ports:
-      - "4173:4173"
-    env_file:
-      - ./.env
-    environment:
-      NODE_ENV: production
-    restart: unless-stopped
-    networks:
-      - smartswap-net
-
   logs-database:
     image: clickhouse/clickhouse-server:latest
     container_name: logs-database
@@ -149,6 +98,3 @@ volumes:
 networks:
   smartswap-net:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.28.0.0/16
