@@ -9,8 +9,11 @@ services:
       - ./.env
     environment:
       - LOGS_DB_URL=jdbc:clickhouse://logs-database:8123/default
-      - LOGS_DB_USERNAME=${CLICKHOUSE_USER}
-      - LOGS_DB_PASSWORD=${CLICKHOUSE_PASSWORD}
+      - LOGS_DB_USERNAME=${LOGS_DB_USERNAME}
+      - LOGS_DB_PASSWORD=${LOGS_DB_PASSWORD}
+      - CORE_DB_URL=jdbc:mysql://mysql-database:3306/smartswap
+      - CORE_DB_USERNAME=${CORE_DB_USERNAME}
+      - CORE_DB_PASSWORD=${CORE_DB_PASSWORD}
     restart: unless-stopped
     networks:
       - smartswap-net
@@ -18,6 +21,7 @@ services:
       - "host.docker.internal:host-gateway"
     depends_on:
       - logs-database
+      - core-database
 
   qtb:
     build:
@@ -36,6 +40,8 @@ services:
       - "127.0.0.1:5003:5003"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      - core-database
 
   qtsbe-api:
     build:
@@ -82,9 +88,13 @@ services:
       - "9000:9000"
     volumes:
       - clickhouse_data:/var/lib/clickhouse
-      - ./clickhouse_init:/docker-entrypoint-initdb.d
+      - ./databases/clickhouse:/docker-entrypoint-initdb.d
     env_file:
       - ./.env
+    environment:
+      - CLICKHOUSE_USER=${LOGS_DB_USERNAME}
+      - CLICKHOUSE_PASSWORD=${LOGS_DB_PASSWORD}
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
     ulimits:
       nofile:
         soft: 262144
@@ -92,8 +102,28 @@ services:
     networks:
       - smartswap-net
 
+  core-database:
+    image: mysql:8.0
+    container_name: core-database
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${CORE_DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=smartswap
+      - MYSQL_USER=${CORE_DB_USERNAME}
+      - MYSQL_PASSWORD=${CORE_DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./databases/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - smartswap-net
+
 volumes:
   clickhouse_data: {}
+  mysql_data: {}
 
 networks:
   smartswap-net:
