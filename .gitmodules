@@ -1,0 +1,9 @@
+[submodule "QTSBE"]
+	path = QTSBE
+	url = https://github.com/simonpotel/QTSBE
+[submodule "qtb"]
+	path = qtb
+	url = https://github.com/smartswap-org/qtb
+[submodule "nexus"]
+	path = nexus
+	url = https://github.com/smartswap-org/nexus
