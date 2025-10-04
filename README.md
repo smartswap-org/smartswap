@@ -1,10 +1,45 @@
 # Smartswap
 
-<img src="https://avatars.githubusercontent.com/u/171923264" width="125" height="125">
+## Tech Stack
 
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+### Frontend
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 
-## Quick Start with Docker
+### Backend
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+
+### Data & Analysis
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white)
+
+### Databases
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![ClickHouse](https://img.shields.io/badge/ClickHouse-FFCC01?style=for-the-badge&logo=clickhouse&logoColor=black)
+
+### Infrastructure & Tools
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
+
+### Exchanges
+![Binance](https://img.shields.io/badge/Binance-FCD535?style=for-the-badge&logo=binance&logoColor=white)
+
+### Prerequisites
+
+![Python](https://img.shields.io/badge/Python-v3.8+-blue?style=flat-square&logo=python)
+![Java](https://img.shields.io/badge/Java-v17+-red?style=flat-square&logo=openjdk)
+![Docker](https://img.shields.io/badge/Docker-v20+-blue?style=flat-square&logo=docker)
+
+## Project Structure
+
+## Quick Start
 
 1. **Clone the repository**
 ```bash
@@ -12,92 +47,12 @@ git clone https://github.com/smartswap-org/smartswap --recursive
 cd smartswap
 ```
 
-2. **Setup database**
-You need to setup a database service and prepare environnement.
-You can use database module : qtb/databases/create_env/create_env.py
-
-3. **Set up environment files**
-
-Create `.env` files for each service:
-
-- qtb
-- aegis
-
-You can use .env.example to see samples.
-
-4. **Configure your services**
-
-QTB Configuration (`qtb/configs/`):
-```json
-{
-    "discord": {
-        "guild_id": "YOUR_DISCORD_SERVER_ID",
-        "category_id": "YOUR_DISCORD_CATEGORY_ON_SERVER_ID",
-        "token": "YOUR_DISCORD_DEVELOPER_APP_TOKEN",
-        "prefix": "$"
-    }
-}
-```
-
-Exchange Configuration (`qtb/configs/exchanges.json`):
-```json
-{
-    "Binance": {
-        "access": {
-            "api_key": "YOUR_BINANCE_API_KEY",
-            "api_secret": "YOUR_BINANCE_API_SECRET",
-            "ip_address_allow": ["YOUR_IP_ADDRESS"]
-        },
-        "ohlcv_folder_path": "/app/QTSBE/data/bank",
-        "ohlcv": [
-            "BTC/USDC",
-            "ETH/USDC"
-        ]
-    }
-}
-```
-
-QTSBE Configuration (`QTSBE/tools/auto_fetch/config.json`):
-```json
-{
-    "Binance": {
-        "assets": [
-            ["BTC/USDC", "1d"],
-            ["ETH/USDC", "1d"]
-        ]
-    }
-}
-```
-
-5. **Launch the services**
+2. **Setup environment**
 ```bash
-# Start all services
-docker-compose up -d
-
-# Or start specific services
-docker-compose up -d qtb qtsbe-api webapp
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
+cp .env.example .env
 ```
 
-## Services
-
-The application consists of several Docker services:
-
-- **QTB**: Trading bot service
-- **QTSBE-API**: Backend API service (Port 5002)
-- **QTSBE-Auto-Fetch**: Automatic data fetching service
-- **Aegis-API**: Security service (Port 5001)
-- **WebApp**: Frontend interface (Port 3000)
-
-## Development
-
-To run services in development mode with live reload:
-
+3. **Launch with Docker**
 ```bash
-docker-compose -f docker-compose.yml up
+docker-compose up
 ```
